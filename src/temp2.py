@@ -5,7 +5,8 @@ from numpy import ndarray
 from scipy import ndimage
 import cv2
 import time
-from src.main import maskOutBackgroundColor, phaseCorrelation
+from src.correlation import phaseCorrelation
+from src.tools import maskOutBackgroundColor
 
 # assert("pyproject.toml" in os.listdir(os.getcwd()))
 # 1d fft for template row matching
