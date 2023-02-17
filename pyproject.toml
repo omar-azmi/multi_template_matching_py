@@ -7,7 +7,7 @@ name = "multi_template_matching"
 authors = [{ name = "Omar Azmi" }]
 readme = "./readme.md"
 requires-python = ">=3.11"
-keywords = ["template-matching", "template", "find-in-image"]
+keywords = ["template-matching", "template", "find-in-image", "multi-template"]
 license = { text = "undefined" }
 dependencies = ["numpy"]
 version = "0.1.0"

@@ -58,8 +58,8 @@ def findTemplateIn(scan_img_path: Path, template_img_path: Path, scan_rect: Tupl
 	return match_rects
 
 
-scan_img_path = "./benchmark/base_small.jpg"
-template_img_path = "./benchmark/template.jpg"
+scan_img_path = "./assets/base_small.jpg"
+template_img_path = "./assets/templates/45.jpg"
 
 match_rects = findTemplateIn(scan_img_path, template_img_path)
 print(f"matching rectangle coordinates:\n\t{match_rects}")

@@ -91,8 +91,8 @@ def matchTemplateOfMipmaps(image_mipmaps: Mipmap, template_mipmaps: Mipmap, meth
 	return (y, x)
 
 
-scan_img_path = "./benchmark/base.jpg"
-template_path = "./benchmark/template.jpg"
+scan_img_path = "./assets/base.jpg"
+template_path = "./assets/templates/45.jpg"
 
 scan_img = np.asarray(cv2.imread(scan_img_path, cv2.IMREAD_GRAYSCALE))
 template_img = np.asarray(cv2.imread(template_path, cv2.IMREAD_GRAYSCALE))

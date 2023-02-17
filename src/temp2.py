@@ -11,8 +11,8 @@ from src.main import maskOutBackgroundColor, phaseCorrelation
 # 1d fft for template row matching
 # downsample fft pyramid then progressive match tree/routines
 
-scan_img_path = "./benchmark/base.jpg"
-img_path = "./benchmark/template.jpg"
+scan_img_path = "./assets/base.jpg"
+img_path = "./assets/templates/45.jpg"
 resize = 1
 
 scan_img = np.asarray(cv2.imread(scan_img_path, cv2.IMREAD_GRAYSCALE))

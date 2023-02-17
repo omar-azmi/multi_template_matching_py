@@ -83,8 +83,8 @@ def computePhaseCorrelation(base_img: ndarray[int | float], template_img: ndarra
 	return correlation
 
 
-scan_img_path = "./benchmark/base.jpg"
-template_img_path = "./benchmark/template.jpg"
+scan_img_path = "./assets/base.jpg"
+template_img_path = "./assets/templates/45.jpg"
 
 scan_img = np.asarray(cv2.imread(scan_img_path, cv2.IMREAD_GRAYSCALE))
 template_img = np.asarray(cv2.imread(template_img_path, cv2.IMREAD_GRAYSCALE))
