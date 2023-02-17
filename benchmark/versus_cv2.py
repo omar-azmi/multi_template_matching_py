@@ -5,7 +5,8 @@ import numpy as np
 from numpy import ndarray
 from scipy import ndimage
 import cv2
-from src.main import phaseCorrelationWithFT, maskOutBackgroundColor
+from src.correlation import phaseCorrelationWithFT
+from src.tools import maskOutBackgroundColor
 
 # assert("pyproject.toml" in os.listdir(os.getcwd()))
 

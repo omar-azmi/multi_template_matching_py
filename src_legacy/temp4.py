@@ -54,7 +54,7 @@ t0 = time.time()
 
 for i in range(1, 120 + 1):
 	print(i)
-	template_path = f"./cutouts/{i}.jpg"
+	template_path = f"./assets/templates/{i}.jpg"
 	template_img = np.asarray(cv2.imread(template_path, cv2.IMREAD_UNCHANGED))
 	template_img_mask = (ndimage.binary_erosion(maskOutBackgroundColor(template_img, [255, 255, 255], 30), np.ones((5, 5))) * 255).astype(np.uint8)
 	template_mipmaps = constructMipmap(template_img, min_shape=1, divisions=len(scan_mipmaps) - 1)
