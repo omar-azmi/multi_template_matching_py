@@ -9,7 +9,7 @@ readme = "./readme.md"
 requires-python = ">=3.11"
 keywords = ["template-matching", "template", "find-in-image", "multi-template"]
 license = { text = "undefined" }
-dependencies = ["numpy"]
+dependencies = ["numpy", "opencv-python", "scikit-image"]
 version = "0.1.0"
 description = "naive way of template matching with optional weighting/masking, but works 9x slower than opencv's more general cross-correlation template matching. subharashii indeed!"
 

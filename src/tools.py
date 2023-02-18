@@ -1,6 +1,7 @@
-from typing import List, Tuple, TypeAlias
+from typing import Iterator, List, Literal, Optional, Tuple, TypeAlias
 
 import numpy as np
+from cv2 import Mat, boundingRect, connectedComponents
 from numpy import ndarray
 
 # assert("pyproject.toml" in os.listdir(os.getcwd()))
@@ -90,3 +91,34 @@ def constructPower2Shapes(shape: Tuple[int, ...], min_shape: int | Tuple[int, ..
 		max_shape = [s // 2 for s in max_shape]
 		divisions -= 1
 	return shapes_power2
+
+
+def uniqueElementsInOrder(arr: ndarray[int] | Mat, axis: int = 0, order: Literal[1, -1] = 1, ignore_values: List[int] = []) -> List[int]:
+	# make `axis` the first axis of `arr` by circulating/rolling axis as needed
+	arr = np.rollaxis(arr, axis, 0)
+	uniques_along_axis = np.concatenate([np.unique(row) for row in arr])
+	if order == -1:
+		# we wish to traverse from end of axis to its begining (think left-to-right, or bottom-to-top traversal)
+		uniques_along_axis = np.flip(uniques_along_axis)
+	ordered_uniques_dict = {v: True for v in uniques_along_axis}
+	for val in ignore_values:
+		if val in ordered_uniques_dict:
+			del ordered_uniques_dict[val]
+	ordered_uniques = list(ordered_uniques_dict.keys())
+	return ordered_uniques
+
+
+def imageComponents(binary_image: ndarray[bool | np.uint8] | Mat, order: Optional[Literal["y+", "y-", "x+", "x-"]] = None) -> Iterator[Tuple[int, Tuple[int, int, int, int], ndarray[np.uint8]]]:
+	labeled_image: ndarray[int]
+	num_labels, labeled_image = connectedComponents(binary_image)
+	labels = list(range(1, num_labels))
+	if order is not None:
+		axis = 0 if order[0] == "y" else 1
+		direction = 1 if order[1] == "+" else -1
+		labels = uniqueElementsInOrder(labeled_image, axis=axis, order=direction, ignore_values=[0,])
+	for i in labels:
+		label_i_image = (labeled_image == i).astype(np.uint8, copy=False)
+		x, y, w, h = boundingRect(label_i_image)  # as `Tuple[int, int, int, int]`
+		# we yield a copy of the sliced `label_i_image`, because otherwise, the entirity of the bigger
+		# `label_i_image` will remain in-memory without its unnecessary parts being garbage collected
+		yield (i, (y, x, h, w), label_i_image[y:y + h, x:x + w].copy())
